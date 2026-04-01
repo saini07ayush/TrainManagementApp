@@ -2,9 +2,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.LinkedHashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class TrainConsistManagementApp {
+public class TrainManagementApp {
     public static void main(String[] args) {
 
         System.out.println("=================================");
@@ -18,21 +20,16 @@ public class TrainConsistManagementApp {
 
         ArrayList<String> passengerBogies = new ArrayList<>();
 
-        // Adding passenger bogies
         passengerBogies.add("Sleeper");
         passengerBogies.add("AC Chair");
         passengerBogies.add("First Class");
 
         System.out.println("Passenger Bogies after addition: " + passengerBogies);
 
-        // Removing a bogie
         passengerBogies.remove("AC Chair");
         System.out.println("After removing AC Chair: " + passengerBogies);
 
-        // Checking if bogie exists
         System.out.println("Contains Sleeper: " + passengerBogies.contains("Sleeper"));
-
-        // Total bogies
         System.out.println("Total Passenger Bogies: " + passengerBogies.size());
 
         System.out.println("Final Passenger Bogie List: " + passengerBogies);
@@ -44,21 +41,14 @@ public class TrainConsistManagementApp {
 
         HashSet<String> bogieIDs = new HashSet<>();
 
-        // Adding bogie IDs (duplicates intentionally)
         bogieIDs.add("BG101");
         bogieIDs.add("BG102");
         bogieIDs.add("BG103");
         bogieIDs.add("BG101"); // Duplicate
         bogieIDs.add("BG104");
-        bogieIDs.add("BG102"); // Duplicate
 
-        // Display unique bogie IDs
         System.out.println("Unique Bogie IDs: " + bogieIDs);
-
-        // Check if bogie exists
         System.out.println("Contains BG101: " + bogieIDs.contains("BG101"));
-
-        // Total unique bogies
         System.out.println("Total Unique Bogies: " + bogieIDs.size());
 
         // =====================================================
@@ -68,7 +58,6 @@ public class TrainConsistManagementApp {
 
         List<String> trainConsist = new LinkedList<>();
 
-        // Add bogies in sequence
         trainConsist.add("Engine");
         trainConsist.add("Sleeper");
         trainConsist.add("AC");
@@ -77,38 +66,49 @@ public class TrainConsistManagementApp {
 
         System.out.println("Initial Train Consist: " + trainConsist);
 
-        // Insert Pantry Car at position 2
         trainConsist.add(2, "Pantry Car");
         System.out.println("After adding Pantry Car at position 2: " + trainConsist);
 
-        // Remove first bogie
         ((LinkedList<String>) trainConsist).removeFirst();
         System.out.println("After removing first bogie: " + trainConsist);
 
-        // Remove last bogie
         ((LinkedList<String>) trainConsist).removeLast();
         System.out.println("After removing last bogie: " + trainConsist);
 
-        // Display final consist
         System.out.println("Final Ordered Train Consist: " + trainConsist);
 
         // =====================================================
-        // UC5 - Preserve Insertion Order of Bogies (LinkedHashSet)
+        // UC5 - Preserve Insertion Order (LinkedHashSet)
         // =====================================================
         System.out.println("\nUC5 - Preserve Insertion Order of Bogies (LinkedHashSet)");
 
         LinkedHashSet<String> trainFormation = new LinkedHashSet<>();
 
-        // Add bogies
         trainFormation.add("Engine");
         trainFormation.add("Sleeper");
         trainFormation.add("Cargo");
         trainFormation.add("Guard");
-
-        // Add duplicate bogie
         trainFormation.add("Sleeper"); // Duplicate ignored
 
-        // Display final formation
         System.out.println("Final Train Formation: " + trainFormation);
+
+        // =====================================================
+        // UC6 - Map Bogie to Capacity (HashMap)
+        // =====================================================
+        System.out.println("\nUC6 - Map Bogie to Capacity (HashMap)");
+
+        HashMap<String, Integer> capacityMap = new HashMap<>();
+
+        // Insert bogie capacities
+        capacityMap.put("Sleeper", 72);
+        capacityMap.put("AC Chair", 60);
+        capacityMap.put("First Class", 40);
+        capacityMap.put("Cargo", 100);
+
+        // Display bogie and capacity using entrySet()
+        System.out.println("Bogie Capacity Details:");
+        for (Map.Entry<String, Integer> entry : capacityMap.entrySet()) {
+            System.out.println("Bogie: " + entry.getKey() + " -> Capacity: " + entry.getValue());
+        }
     }
 }
