@@ -1,17 +1,16 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
-// Bogie class for UC7
+// Bogie class for UC7 & UC8
 class Bogie {
     String name;
     int capacity;
 
-    // Constructor
     Bogie(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
     }
 
-    // Display bogie details
     public String toString() {
         return name + " - Capacity: " + capacity;
     }
@@ -102,22 +101,39 @@ public class TrainManagementApp {
         }
 
         // =====================================================
-        // UC7 - Sort Bogies by Capacity (Comparator)
+        // UC7 - Comparator Sorting
         // =====================================================
         System.out.println("\nUC7 - Sort Bogies by Capacity (Comparator)");
 
         List<Bogie> bogieList = new ArrayList<>();
-
-        // Add bogies
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 60));
         bogieList.add(new Bogie("First Class", 40));
 
-        // Sort using Comparator
         bogieList.sort(Comparator.comparingInt(b -> b.capacity));
 
-        // Display sorted bogies
-        System.out.println("Bogies Sorted by Capacity:");
+        System.out.println("Sorted Bogies:");
+        for (Bogie b : bogieList) {
+            System.out.println(b);
+        }
+
+        // =====================================================
+        // UC8 - Stream Filtering
+        // =====================================================
+        System.out.println("\nUC8 - Filter Passenger Bogies Using Streams");
+
+        // Filter bogies with capacity > 60
+        List<Bogie> filteredBogies = bogieList.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        System.out.println("Filtered Bogies (Capacity > 60):");
+        for (Bogie b : filteredBogies) {
+            System.out.println(b);
+        }
+
+        // Show original list unchanged
+        System.out.println("\nOriginal Bogie List (Unchanged):");
         for (Bogie b : bogieList) {
             System.out.println(b);
         }
