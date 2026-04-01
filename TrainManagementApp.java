@@ -11,6 +11,10 @@ class Bogie {
         this.capacity = capacity;
     }
 
+    public String getType() {
+        return name;
+    }
+
     public String toString() {
         return name + " - Capacity: " + capacity;
     }
@@ -136,6 +140,22 @@ public class TrainManagementApp {
         System.out.println("\nOriginal Bogie List (Unchanged):");
         for (Bogie b : bogieList) {
             System.out.println(b);
+        }
+        // =====================================================
+        // UC9 - Group Bogies by Type
+        // =====================================================
+        System.out.println("\nUC9 - Group Bogies by Type (Streams groupingBy)");
+
+        // Stream + groupingBy
+        Map<String, List<Bogie>> groupedBogies = bogieList.stream()
+                .collect(Collectors.groupingBy(Bogie::getType));
+
+        // Print grouped result
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("Type: " + entry.getKey());
+            for (Bogie b : entry.getValue()) {
+                System.out.println("   " + b);
+            }
         }
     }
 }
